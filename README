@@ -1,0 +1,41 @@
+Simple XML stylesheet to convert from gnu keyring (palm os) XML file to a keeypass 2.x XML file.
+
+Inspired by http://github.com/rocketraman/keyring-to-keypassx/tree/master
+
+I needed this when my Clie finally died and I switched to a BlackBerry (I still miss PalmOS)
+
+To export a Palm pdb file to XML, download export.jar from
+
+http://gnukeyring.sourceforge.net/conduits.html
+  (currently (2009-08-23) the jar file is at: http://hoenicke.ath.cx/keyring2-pre/export.jar )
+
+Execute the export e.g.
+
+java -jar export.jar Keys-Gtkr.pdb password > keyring.xml
+
+It should create an XML file with the form:
+
+<pwlist>
+  <pwentry>
+    <title></title>
+    <category></category>
+    <username></username>
+    <password></password>
+    <notes></notes>
+    <lastmodtime></lastmodtime>
+  </pwentry>
+</pwlist>
+
+Execute the stylesheet with an XSLT v2 processor, such as Saxon e.g.
+
+(
+I went to http://sourceforge.net/projects/saxon/ and got the latest version (saxonhe9-2-0-2j.zip as of 2009-08-23) and extracted saxon9he.jar
+But any other older or presumably newer saxon9.jar should work, or other XSLT v2 processor to which you might have access.
+)
+
+java -jar saxon9he.jar -xsl:keyring-to-keepass.xsl -s:keyring.xml -o:keepass.xml
+
+This will convert it into keepass.xml
+
+The keepass.xml file should be importable into KeePass 2.x via: File -> Import... -> KeePass XML (2.x)
+One group will be created for each category in keyring.
