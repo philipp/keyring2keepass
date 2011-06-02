@@ -39,3 +39,6 @@ This will convert it into keepass.xml
 
 The keepass.xml file should be importable into KeePass 2.x via: File -> Import... -> KeePass XML (2.x)
 One group will be created for each category in keyring.
+
+keyring-to-keepass1.xsl can be used in the same way to convert to KeePass
+1.x format. This is useful if you want to use KeePassX on Linux or Mac.
